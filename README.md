@@ -1,6 +1,6 @@
 # Rubik's Cubes CRUD System with Login
 
-This project is a simple **CRUD** (Create, Read, Update, Delete) system for magic cubes with a basic login authentication. The school project is developed using **PHP** and **MySQL**, and uses **Bootstrap** for styling.
+This project is a simple **CRUD** (Create, Read, Update, Delete) system for rubik's cubes with a basic login authentication. The school project is developed using **PHP** and **MySQL**, and uses **Bootstrap** for styling.
 
 ## Features
 
@@ -111,6 +111,7 @@ $conn->close();
 - Logout functionality ensures that users can securely end their session.
 
 
+
 ## Directory Structure
 
 ```bash
@@ -133,6 +134,7 @@ project/
 ```
 
 
+
 ## How to Use
 
 - **Login**: Use the username and password you created (admin/admin123) or another user you registered.
@@ -140,10 +142,13 @@ project/
 - **Logout**: Use the logout button to securely end the session.
 
 
+
+
 ## Future Improvements
 
 - **Password Encryption**: Implement password hashing (e.g., using `password_hash` in PHP) to protect user credentials.
 - **Search Filters & Pagination**: Add search functionality to easily find specific models and paginate results for better navigation.
+
 
 
 
