@@ -18,8 +18,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bind_param("sisddssi", $modelName, $releaseYear, $cubeType, $cubeSize, $cubeWeight, $cubePrice, $brandName, $id);
 
     if ($stmt->execute()) {
+        session_start();
+        $_SESSION['success_message'] = "Cubo atualizado com sucesso!";
         header('Location: view.php');
-        exit();
+        exit();        
     } else {
         echo "Erro ao atualizar modelo: " . $conn->error;
     }

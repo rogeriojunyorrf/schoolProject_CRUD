@@ -11,8 +11,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bind_param("i", $id);
 
     if ($stmt->execute()) {
+        session_start();
+        $_SESSION['success_message'] = "Cubo removido com sucesso!";
         header('Location: view.php');
-        exit();
+        exit();        
     } else {
         echo "Erro ao remover modelo: " . $conn->error;
     }

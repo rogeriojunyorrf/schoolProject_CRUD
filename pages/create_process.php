@@ -21,9 +21,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $sql = "INSERT INTO Cubes (modelName, releaseYear, cubeType, cubeSize, cubeWeight, cubePrice, brandName)
                 VALUES ('$modelName', '$releaseYear', '$cubeType', '$cubeSize', '$cubeWeight', '$cubePrice', '$brandName')";
 
-        if ($conn->query($sql) === TRUE) {
+        if ($conn->query(query: $sql) === TRUE) {
+            session_start();
+            $_SESSION['success_message'] = "Cubo criado com sucesso!";
             header('Location: view.php');
             exit();
+
         } else {
             echo "Erro ao cadastrar: " . $conn->error;
         }
@@ -32,4 +35,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $conn->close();
 }
 ?>
-

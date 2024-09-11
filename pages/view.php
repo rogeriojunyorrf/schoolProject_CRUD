@@ -4,6 +4,10 @@ if (!isset($_SESSION['user'])) {
     header('Location: login.php'); 
     exit;
 }
+if(isset($_SESSION['success_message'])) {
+    $message = $_SESSION['success_message'];
+    unset($_SESSION['success_message']);
+}
 ?>
 
 <?php include '../db/db_connect.php'; ?>
@@ -14,8 +18,33 @@ if (!isset($_SESSION['user'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Visualizar Cadastros</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .floating-alert {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+            opacity: 0.9;
+        }
+    </style>
 </head>
 <body>
+<?php
+if (!empty($message)) {
+    echo '<div class="alert alert-success floating-alert">' . $message . '</div>';
+}
+?>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    setTimeout(function() {
+        let alert = document.querySelector('.floating-alert');
+        if (alert) {
+            alert.style.display = 'none';
+        }
+    }, 3000); 
+    
+</script>
     <div class="d-flex">
         <div class="bg-dark p-3" style="width: 250px; height: 100vh;">
             <h2 class="text-white">Menu</h2>
