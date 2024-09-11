@@ -18,8 +18,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bind_param("sisddssi", $modelName, $releaseYear, $cubeType, $cubeSize, $cubeWeight, $cubePrice, $brandName, $id);
 
     if ($stmt->execute()) {
-        echo "<h4>Modelo atualizado com sucesso!<h4>";
-        echo "<a href='../index.html' class='btn btn-primary'>Voltar à Página Inicial</a>";
+        header('Location: view.php');
+        exit();
     } else {
         echo "Erro ao atualizar modelo: " . $conn->error;
     }

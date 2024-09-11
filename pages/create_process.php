@@ -22,8 +22,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 VALUES ('$modelName', '$releaseYear', '$cubeType', '$cubeSize', '$cubeWeight', '$cubePrice', '$brandName')";
 
         if ($conn->query($sql) === TRUE) {
-            echo "<h3>Cadastro realizado com sucesso!</h3>";
-            echo "<a href='../index.html' class='btn btn-primary'>Voltar à Página Inicial</a>";
+            header('Location: view.php');
+            exit();
         } else {
             echo "Erro ao cadastrar: " . $conn->error;
         }

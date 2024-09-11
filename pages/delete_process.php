@@ -11,8 +11,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bind_param("i", $id);
 
     if ($stmt->execute()) {
-        echo "<h4>Modelo removido com sucesso!</h4>";
-        echo "<a href='../index.html' class='btn btn-primary'>Voltar à Página Inicial</a>";
+        header('Location: view.php');
+        exit();
     } else {
         echo "Erro ao remover modelo: " . $conn->error;
     }
