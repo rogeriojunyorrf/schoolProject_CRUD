@@ -1,10 +1,11 @@
 <?php
 session_start();
 if (!isset($_SESSION['username'])) {
-    header('Location: index.php');
+    header('Location: ../index.php');
     exit();
 }
 ?>
+
 
 <?php include '../db/db_connect.php'; ?>
 <!DOCTYPE html>
