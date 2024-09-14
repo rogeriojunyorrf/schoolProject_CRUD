@@ -125,12 +125,10 @@ project/
 │   ├── update.php             # Page to update existing models
 │   ├── delete.php             # Page to delete models
 │   ├── view.php               # Page to view all models
-│   └── login.php              # Login page
-│   └── index.php              # Home page after login
-│   └── logout.php             # Logout script
 │
 ├── create_admin.php           # Script to insert an admin user (you can delete after use)
-├── index.html                 # Home page
+├── index.php                  # Login page
+├── logout.php                 # Logout script
 └── README.md                  # Project instructions
 ```
 
