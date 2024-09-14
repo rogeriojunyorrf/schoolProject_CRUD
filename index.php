@@ -14,10 +14,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($result->num_rows > 0) {
         $user = $result->fetch_assoc();
-    
+
         if ($password === $user['password']) {
             $_SESSION['username'] = $username;
-            header('Location: pages/view.php');
+            $_SESSION['role'] = $user['role'];  
+
+            if ($user['role'] === 'admin') {
+                header('Location: pages/view.php'); 
+            } elseif ($user['role'] === 'viewer') {
+                header('Location: pages/view_only.php'); 
+            } else {
+                $error = "Função de usuário desconhecida!";
+            }
             exit();
         } else {
             $error = "Senha incorreta!";
@@ -25,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } else {
         $error = "Usuário não encontrado!";
     }
-
+    
     $stmt->close();
     $conn->close();
 }
