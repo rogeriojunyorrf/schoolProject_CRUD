@@ -1,6 +1,6 @@
 <?php
 session_start();
-include '../db/db_connect.php'; 
+include 'db/db_connect.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
@@ -8,23 +8,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $sql = "SELECT * FROM Users WHERE username = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("s", $username); 
+    $stmt->bind_param("s", $username);
     $stmt->execute();
-    $result = $stmt->get_result(); 
+    $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
         $user = $result->fetch_assoc();
-        if ($password === $user['password']) { 
-            $_SESSION['user'] = $username; 
-            header('Location: ../pages/index.php'); 
-            exit;
+
+        if ($password === $user['password']) {
+            $_SESSION['username'] = $username;
+            header('Location: home.php');
+            exit();
         } else {
             $error = "Senha incorreta!";
         }
     } else {
         $error = "Usuário não encontrado!";
     }
+
     $stmt->close();
+    $conn->close();
 }
 ?>
 
@@ -39,9 +42,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <body>
     <div class="container mt-5">
         <h2>Login</h2>
+
         <?php if (isset($error)): ?>
             <div class="alert alert-danger"><?php echo $error; ?></div>
         <?php endif; ?>
+
         <form method="POST" action="">
             <div class="mb-3">
                 <label for="username" class="form-label">Nome de Usuário</label>

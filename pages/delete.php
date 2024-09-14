@@ -1,10 +1,11 @@
 <?php
 session_start();
-if (!isset($_SESSION['user'])) {
-    header('Location: login.php');
-    exit;
+if (!isset($_SESSION['username'])) {
+    header('Location: index.php');
+    exit();
 }
 ?>
+
 
 <?php include '../db/db_connect.php'; ?>
 <!DOCTYPE html>
@@ -32,7 +33,7 @@ if (!isset($_SESSION['user'])) {
                 <li class="nav-item">
                     <a class="nav-link text-white" href="view.php">Visualizar Cadastros</a>
                 </li>
-                <a href="../pages/logout.php" class="btn btn-danger">Logout</a>
+                <a href="../logout.php" class="btn btn-danger">Logout</a>
             </ul>
         </div>
 

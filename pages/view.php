@@ -1,9 +1,10 @@
 <?php
 session_start();
-if (!isset($_SESSION['user'])) {
-    header('Location: login.php'); 
-    exit;
+if (!isset($_SESSION['username'])) {
+    header('Location: index.php'); 
+    exit();
 }
+
 if(isset($_SESSION['success_message'])) {
     $message = $_SESSION['success_message'];
     unset($_SESSION['success_message']);
@@ -61,7 +62,7 @@ if (!empty($message)) {
                 <li class="nav-item">
                     <a class="nav-link text-white" href="view.php">Visualizar Cadastros</a>
                 </li>
-                <a href="../pages/logout.php" class="btn btn-danger">Logout</a>
+                <a href="../logout.php" class="btn btn-danger">Logout</a>
             </ul>
         </div>
 
