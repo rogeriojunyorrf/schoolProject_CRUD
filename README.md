@@ -1,4 +1,4 @@
-# Rubik's Cubes CRUD System with Login
+# Rubik's Cube Management System with Login and CRUD Functionality
 
 This project is a simple **CRUD** (Create, Read, Update, Delete) system for rubik's cubes with a basic login authentication. The school project is developed using **PHP** and **MySQL**, and uses **Bootstrap** for styling.
 
@@ -56,21 +56,21 @@ CREATE TABLE Cubes (
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "your_database_name"; 
+$dbname = "your_database_name";  # I used DBprojeto
 
-// Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-// Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 ?>
 ```
 
-### 4. Insert an Admin User
+### 4. Insert Users
 
-- To test the login system, manually insert an admin user by using the following script:
+- To test the login system, manually insert an admin user by using the following scripts:
+
+#### 4.1 Insert Admin
 
 ```php
 <?php
@@ -78,10 +78,11 @@ include 'db/db_connect.php';
 
 $username = "admin";
 $password = "admin123";
+$role = "admin"; 
 
-$sql = "INSERT INTO Users (username, password) VALUES (?, ?)";
+$sql = "INSERT INTO Users (username, password, role) VALUES (?, ?, ?)";
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("ss", $username, $password);
+$stmt->bind_param("sss", $username, $password, $role);
 $stmt->execute();
 
 echo "Admin user inserted successfully.";
@@ -91,7 +92,29 @@ $conn->close();
 ?>
 ```
 
-- After inserting, you can delete this script.
+#### 4.2 Insert Viewer
+
+```php
+<?php
+include 'db/db_connect.php';
+
+$username = "viewer";
+$password = "viewer123";
+$role = "viewer"; 
+
+$sql = "INSERT INTO Users (username, password, role) VALUES (?, ?, ?)";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("sss", $username, $password, $role);
+$stmt->execute();
+
+echo "Usuário viewer inserido com sucesso.";
+
+$stmt->close();
+$conn->close();
+?>
+```
+
+- After inserting, you can delete these scripts.
 
 ### 5. Start the Server
 
@@ -125,8 +148,10 @@ project/
 │   ├── update.php             # Page to update existing models
 │   ├── delete.php             # Page to delete models
 │   ├── view.php               # Page to view all models
+│   ├── view_only.php          # Page to view all models (for users with "viewer" role)
 │
 ├── create_admin.php           # Script to insert an admin user (you can delete after use)
+├── create_user.php            # Script to insert an viewer user (you can delete after use)
 ├── index.php                  # Login page
 ├── logout.php                 # Logout script
 └── README.md                  # Project instructions
