@@ -33,7 +33,8 @@ git clone https://github.com/junyorrf/schoolProject_CRUD.git
 CREATE TABLE Users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50) NOT NULL UNIQUE,
-    password VARCHAR(255) NOT NULL
+    password VARCHAR(255) NOT NULL,
+    role VARCHAR(20) NOT NULL 
 );
 
 CREATE TABLE Cubes (
@@ -114,12 +115,19 @@ $conn->close();
 ?>
 ```
 
-- After inserting, you can delete these scripts.
+- **Important**: After inserting users, make sure to delete these scripts (`create_admin.php` and `create_user.php`) to prevent unauthorized access.
+
 
 ### 5. Start the Server
 
 - Open **XAMPP** and start **Apache** and **MySQL**.
 - Access the project in your browser by navigating to http://localhost/project.
+
+
+### Notes
+- **Database Name**: Make sure to update the database name in `db/db_connect.php` to the actual name you used during the setup (`DBprojeto` is used in the examples).
+- **User Roles**: Ensure that the `role` field is correctly set in the database (`admin` or `viewer`) to control user access.
+
 
 ### 6. CRUD Functionality
 
@@ -128,10 +136,14 @@ $conn->close();
 - **Update Model**: Edit existing cube model details through the Update section.
 - **Delete Model**: Remove a cube model from the database using the Delete section.
 
+- **View Models (for viewers)**: Viewer users can only access the `view_only.php` page, which displays all Rubik's cube models without any editing or deletion permissions.
+
+
 ### 7. Security
 
-- **All** CRUD pages are protected by the login system. If a user tries to access these pages without logging in, they will be redirected to the login page.
-- Logout functionality ensures that users can securely end their session.
+- **Role-Based Access Control (RBAC)**: The system restricts access to specific pages based on the user's role (admin or viewer). Admin users have full CRUD permissions, while viewer users can only view the models.
+- **Login Protection**: **All** CRUD pages are protected by the login system. Unauthorized users will be redirected to the login page.
+- **Logout**: The logout functionality ensures that users can securely end their session, preventing unauthorized access to protected areas.
 
 
 
@@ -148,10 +160,12 @@ project/
 │   ├── update.php             # Page to update existing models
 │   ├── delete.php             # Page to delete models
 │   ├── view.php               # Page to view all models
-│   ├── view_only.php          # Page to view all models (for users with "viewer" role)
+│   ├── view_only.php          # Page to view models for 'viewer' users
 │
-├── create_admin.php           # Script to insert an admin user (you can delete after use)
-├── create_user.php            # Script to insert an viewer user (you can delete after use)
+├── scripts/                   # Temporary scripts folder (delete after use)
+│   ├── create_admin.php       # Script to insert an admin user
+│   └── create_user.php        # Script to insert a viewer user
+│
 ├── index.php                  # Login page
 ├── logout.php                 # Logout script
 └── README.md                  # Project instructions
@@ -161,10 +175,10 @@ project/
 
 ## How to Use
 
-- **Login**: Use the username and password you created (admin/admin123) or another user you registered.
-- **CRUD**: Navigate through the Create, View, Update, and Delete functionalities after logging in.
-- **Logout**: Use the logout button to securely end the session.
-
+- **Login**: Use the username and password you created (admin/admin123 for admin users, viewer/viewer123 for viewer users).
+- **Admin Access**: Once logged in as an admin, you can create, view, update, and delete Rubik's cube models.
+- **Viewer Access**: Users with viewer roles can only view the registered models in the `view_only.php` page.
+- **Logout**: Use the logout button in the navigation bar to securely end your session and return to the login page.
 
 
 
