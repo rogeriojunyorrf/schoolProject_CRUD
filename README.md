@@ -192,7 +192,7 @@ project/
 
 ## Author
 
-Created and maintained by [Rogério Junyor](https://github.com/junyorrf) and [Arthur Arêas](https://github.com/arthuramata).
+Created and maintained by [Rogério Junyor](https://github.com/rogeriojunyorrf) and [Arthur Arêas](https://github.com/arthuramata).
 
 Feel free to reach out if you have any questions or suggestions!
 
